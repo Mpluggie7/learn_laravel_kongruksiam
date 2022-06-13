@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 // use App\Models\User; // eloquent
 use Illuminate\Support\Facades\DB; // query builder
+use \App\Http\Controllers\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,5 @@ Route::middleware([
         return view('dashboard', compact('users'));
     })->name('dashboard');
 });
+
+Route::get('/department/all', [DepartmentController::class, 'index'])->name('department');
