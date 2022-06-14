@@ -9,10 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Department extends Model
 {
     use HasFactory;
-    use SoftDelete; 
+    use SoftDeletes; 
 
     protected $fillable = [
         'user_id',
         'department_name'
     ];
+
+    public function user(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

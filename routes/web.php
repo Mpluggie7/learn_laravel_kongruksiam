@@ -31,4 +31,17 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/department/all', [DepartmentController::class, 'index'])->name('department');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function(){
+    Route::get('/department/all', [DepartmentController::class, 'index'])->name('department');
+    Route::post('/department/add', [DepartmentController::class, 'store'])->name('addDepartment');
+    Route::get('/department/edit/{id}', [DepartmentController::class, 'edit']);
+    Route::post('/department/update/{id}', [DepartmentController::class, 'update']);
+
+    Route::get('/department/softdelete/{id}', [DepartmentController::class, 'softdelete']);
+    Route::get('/department/restore/{id}', [DepartmentController::class, 'restore']);
+    Route::get('/department/delete/{id}', [DepartmentController::class, 'delete']);
+});
