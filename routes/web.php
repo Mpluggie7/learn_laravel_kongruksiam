@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Models\User; // eloquent
 use Illuminate\Support\Facades\DB; // query builder
 use \App\Http\Controllers\DepartmentController;
+use \App\Http\Controllers\ServiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,4 +45,10 @@ Route::middleware([
     Route::get('/department/softdelete/{id}', [DepartmentController::class, 'softdelete']);
     Route::get('/department/restore/{id}', [DepartmentController::class, 'restore']);
     Route::get('/department/delete/{id}', [DepartmentController::class, 'delete']);
+
+    Route::get('/service/all', [ServiceController::class, 'index'])->name('service');
+    Route::post('/service/add', [ServiceController::class, 'store'])->name('addService');
+    Route::get('/service/edit/{id}', [ServiceController::class, 'edit']);
+    Route::post('/service/update/{id}', [ServiceController::class, 'update']);
+    Route::get('/service/delete/{id}', [ServiceController::class, 'delete']);
 });
